@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Admin Panel</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div id="app" class="hidden">
+
+  <div id="notifications"></div>
+  <div id="announcementBanner" class="hidden"></div>
+
+  <div id="panel">
+
+    <!-- SIDEBAR -->
+    <aside id="sidebar">
+      <div class="brand">
+        <span class="brand-mark">▣</span>
+        <div class="brand-text">
+          <span class="brand-title">ADMIN</span>
+          <span class="brand-sub">CONTROL PANEL</span>
+        </div>
+      </div>
+
+      <nav id="tabs">
+        <button class="tab-btn active" data-tab="players">Joueurs</button>
+        <button class="tab-btn" data-tab="tools">Outils</button>
+        <button class="tab-btn" data-tab="server">Serveur</button>
+      </nav>
+
+      <button id="closeBtn">Fermer <span class="key">ESC</span></button>
+    </aside>
+
+    <!-- MAIN CONTENT -->
+    <main id="content">
+
+      <!-- TAB: PLAYERS -->
+      <section id="tab-players" class="tab-content active">
+        <div class="section-head">
+          <h2>Joueurs connectés</h2>
+          <div class="head-actions">
+            <input id="playerSearch" type="text" placeholder="Rechercher un joueur...">
+            <button id="refreshPlayersBtn" title="Rafraîchir">⟳</button>
+          </div>
+        </div>
+
+        <div id="playerList" class="player-list"></div>
+      </section>
+
+      <!-- TAB: TOOLS -->
+      <section id="tab-tools" class="tab-content">
+        <div class="section-head">
+          <h2>Outils</h2>
+        </div>
+
+        <div class="tool-grid">
+          <div class="tool-card">
+            <h3>Noclip</h3>
+            <p>Traverse le décor librement (ZQSD + Espace/Ctrl).</p>
+            <button id="noclipToggle" class="toggle-btn">Activer</button>
+          </div>
+
+          <div class="tool-card">
+            <h3>Spawn véhicule</h3>
+            <p>Fait apparaître un véhicule devant toi.</p>
+            <select id="vehicleSelect"></select>
+            <input id="vehicleCustomModel" type="text" placeholder="ou modèle personnalisé...">
+            <button id="spawnVehicleBtn">Spawn</button>
+          </div>
+
+          <div class="tool-card">
+            <h3>Annonce serveur</h3>
+            <p>Envoie un message à tous les joueurs connectés.</p>
+            <input id="announcementInput" type="text" placeholder="Message...">
+            <button id="announcementBtn">Envoyer</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB: SERVER -->
+      <section id="tab-server" class="tab-content">
+        <div class="section-head">
+          <h2>Informations serveur</h2>
+        </div>
+        <div class="info-box">
+          <p><strong>Panel :</strong> admin_panel v1.0.0</p>
+          <p><strong>Développé par :</strong> Soriano</p>
+          <p><strong>Touche d'ouverture :</strong> <span id="keyDisplay">F6</span></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- PLAYER ACTIONS MODAL -->
+  <div id="playerModal" class="modal hidden">
+    <div class="modal-box">
+      <div class="modal-head">
+        <h3 id="modalPlayerName">Joueur</h3>
+        <button id="modalClose">✕</button>
+      </div>
+
+      <div class="modal-grid">
+        <button class="action-btn" data-action="teleportToPlayer">Se téléporter</button>
+        <button class="action-btn" data-action="bringPlayer">Faire venir</button>
+        <button class="action-btn" data-action="heal">Soigner</button>
+        <button class="action-btn" data-action="revive">Ressusciter</button>
+        <button class="action-btn danger" data-action="kill">Tuer</button>
+        <button class="action-btn" data-action="freeze" data-value="true">Freeze</button>
+        <button class="action-btn" data-action="freeze" data-value="false">Unfreeze</button>
+        <button class="action-btn" data-action="spectate">Spectate</button>
+      </div>
+
+      <div class="modal-form">
+        <label>Donner de l'argent (ESX)</label>
+        <div class="inline-form">
+          <input id="giveMoneyAmount" type="number" placeholder="Montant">
+          <select id="giveMoneyType">
+            <option value="money">Cash</option>
+            <option value="bank">Banque</option>
+          </select>
+          <button id="giveMoneyBtn">Donner</button>
+        </div>
+      </div>
+
+      <div class="modal-form">
+        <label>Kick</label>
+        <div class="inline-form">
+          <input id="kickReason" type="text" placeholder="Raison">
+          <button id="kickBtn" class="danger-btn">Kick</button>
+        </div>
+      </div>
+
+      <div class="modal-form">
+        <label>Ban</label>
+        <div class="inline-form">
+          <input id="banReason" type="text" placeholder="Raison">
+          <input id="banDuration" type="number" placeholder="Durée (h) — 0 = permanent">
+          <button id="banBtn" class="danger-btn">Bannir</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
